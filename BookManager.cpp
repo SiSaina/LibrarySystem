@@ -26,6 +26,7 @@ private:
 		cout << "==============CHOOSE BOOK TYPE=============="<<endl;
 		cout << "1. Premium Account"<<endl;
 		cout << "2. Basic Account"<<endl;
+		cout << "3. Back to main menu"<<endl;
 	}
 public:
 	~BookManager(){
@@ -38,23 +39,32 @@ public:
 		this->BA.push_back(BA);
 	}
 	void addBookMenu() {
-        cout << "1. Premium book account" << endl;
-        cout << "2. Basic book account" << endl;
+		bookTypeMenu();
         int choice = val.enterChoice();
 
         switch (choice) {
             case 1: {
-                auto premiumBookAccount = make_unique<PremiumBookAccount>();
-                premiumBookAccount->input();
-                addBook(premiumBookAccount.release());
+				cout<<"How many time you want to add??"<<endl;
+				int time=val.enterChoice();
+				for(int i=0; i<time;i++){
+					auto premiumBookAccount = make_unique<PremiumBookAccount>();
+					premiumBookAccount->input();
+					addBook(premiumBookAccount.release());
+				}
                 break;
             }
             case 2: {
-                auto basicBookAccount = make_unique<BasicBookAccount>();
-                basicBookAccount->input();
-                addBook(basicBookAccount.release());
+				cout<<"How many time you want to add"<<endl;
+				int time=val.enterChoice();
+				for(int i=0; i<time;i++){
+					auto basicBookAccount = make_unique<BasicBookAccount>();
+					basicBookAccount->input();
+					addBook(basicBookAccount.release());
+				}
                 break;
             }
+			case 3:
+				break;
             default:
                 cout << "Error: INVALID INPUT" << endl;
                 break;
@@ -70,6 +80,8 @@ public:
 				break;
 			case 2:
 				viewAllBooksFunction<BasicBookAccount>(BA);
+				break;
+			case 3:
 				break;
 			default:
 				cout << "Error: INVALID INPUT" << endl;
@@ -198,7 +210,6 @@ public:
     }
 	}
 	void updateBook(BookAccount* acc) {
-		char option;
 		bookTypeMenu();
 		int choice = val.enterChoice();
 
@@ -211,6 +222,8 @@ public:
 			updateBookByType<BasicBookAccount>(acc);
 			break;
 		}
+		case 3:
+			break;
 		default:
 			cout << "Error: INVALID INPUT" << endl;
 			break;
@@ -283,6 +296,8 @@ public:
 				deleteBookByType<BasicBookAccount>(acc);
 				break;
 			}
+			case 3:
+				break;
 			default:
 				cout << "Error: INVALID INPUT" << endl;
 				break;
@@ -337,6 +352,8 @@ public:
 				searchBookByType<BasicBookAccount>(acc);
 				break;
 			}
+			case 3:
+				break;
 			default:
 				cout << "Error: INVALID INPUT" << endl;
 				break;
@@ -347,6 +364,7 @@ public:
 		cout<<"==============SORT MENU=============="<<endl;
 		cout<<"1. Sort by ID"<<endl;
 		cout<<"2. Sort by name"<<endl;
+		cout<<"3. Back to main menu"<<endl;
 		int choice=val.enterChoice();
 
 		switch (choice) {
@@ -388,6 +406,8 @@ public:
 			}
 			break;
 		}
+		case 3:
+			break;
 		default:
 			cout<<"Error: INVALID INPUT"<<endl;
 			break;

@@ -15,6 +15,7 @@ private:
 		cout << "==============FIND MENU=============="<<endl;
 		cout << "1. Find by ID"<<endl;
 		cout << "2. Find by name"<<endl;
+        cout << "3. Back to main menu"<<endl;
 	}
 public:
     ~LibrarianManager(){
@@ -24,9 +25,15 @@ public:
     }
 
     void addAccount(){
-        LibrarianAccount* acc = new LibrarianAccount();
-        acc->input();
-        LA.push_back(acc);
+        cout<<"How many you want to add??"<<endl;
+        int time=val.enterChoice();
+
+        for(int i=0; i<time; i++){
+            LibrarianAccount* acc = new LibrarianAccount();
+            acc->input();
+            LA.push_back(acc);
+        }
+
     }
 
     void viewAllAccount(){
@@ -121,10 +128,154 @@ public:
 			}
             break;
         }
+        case 3:
+            break;
         default:
             cout<<"Error: INVALID INPUT"<<endl;
             break;
         }
     }
 
+    void deleteAccount(LibrarianAccount* acc){
+        findMenu();
+        int choice=val.enterChoice();
+        switch (choice) {
+        case 1:{
+            int key=val.enterID();
+
+            auto it=find_if(LA.begin(), LA.end(), [key](const LibrarianAccount* acc) {return acc->getID() == key;});
+			if(it!=LA.end()){
+				cout<<"Book information will be deleted"<<endl;
+				(*it)->display();
+				cout<<"Are you sure you want to delete it?? "<<endl;
+				char choice=val.enterYN();
+				
+				if(choice=='y'||choice=='Y'){
+					auto iter=find(LA.begin(), LA.end(), acc);
+					LA.erase(iter);
+				}else{
+					cout<<"Deletion canceled"<<endl;
+				}
+			}else{
+				cout<<"Not found"<<endl;
+			}
+			break;
+        }
+        case 2:{
+            string key=val.enterName();
+
+			auto it=find_if(LA.begin(), LA.end(), [key](const LibrarianAccount* acc) {return acc->getName() == key;});
+			if(it!=LA.end()){
+				cout<<"Book information will be deleted"<<endl;
+				(*it)->display();
+				cout<<"Are you sure you want to delete it?? ";
+				char choice=val.enterYN();
+				
+				if(choice=='y'||choice=='Y'){
+					auto iter=find(LA.begin(), LA.end(), acc);
+					LA.erase(iter);
+				}else{
+					cout<<"Deletion canceled"<<endl;
+				}
+			}else{
+				cout<<"Not found"<<endl;
+			}
+			break;
+        }
+        case 3:
+            break;
+        default:
+            cout<<"Error: INVALID INPUT"<<endl;
+            break;
+        }
+    }
+    void searchAccount(LibrarianAccount* acc){
+        findMenu();
+		int choice=val.enterChoice();
+
+		switch (choice) {
+		case 1:{
+			int key=val.enterID();
+
+			auto it=find_if(LA.begin(), LA.end(), [key](const LibrarianAccount* acc) {return acc->getID() == key;});
+			if(it!=LA.end()){
+				cout << "==============BOOK INFORMATION=============="<<endl;
+				(*it)->display();
+			}else{
+				cout<<"Not found"<<endl;
+			}
+			break;
+		}
+		case 2:{
+			string key=val.enterName();
+
+			auto it=find_if(LA.begin(), LA.end(), [key](const LibrarianAccount* acc) {return acc->getName() == key;});
+			if(it!=LA.end()){
+				cout << "==============BOOK INFORMATION=============="<<endl;
+				(*it)->display();
+			}else{
+				cout<<"Not found"<<endl;
+			}
+			break;
+		}
+        case 3:
+            break;
+		default:
+			cout<<"Error: INVALID INPUT"<<endl;
+			break;
+		}
+	}
+    void sortAccount(LibrarianAccount* acc){
+        cout<<"==============SORT MENU=============="<<endl;
+		cout<<"1. Sort by ID"<<endl;
+		cout<<"2. Sort by name"<<endl;
+        cout<<"3. Back to main menu"<<endl;
+		int choice=val.enterChoice();
+
+		switch (choice) {
+		case 1:{
+			cout<<"==============SORT MENU=============="<<endl;
+			cout<<"1. Ascending"<<endl;
+			cout<<"2. Descending"<<endl;
+			int option=val.enterChoice();
+
+			switch (option) {
+			case 1:
+				sort(LA.begin(), LA.end(), [](const LibrarianAccount* a, const LibrarianAccount* b) { return a->getID() < b->getID();});
+				break;
+			case 2:
+				sort(LA.begin(), LA.end(), [](const LibrarianAccount* a, const LibrarianAccount* b) { return a->getID() > b->getID();});
+				break;
+			default:
+				cout<<"Error: INVALID INPUT"<<endl;
+				break;
+			}
+			break;
+		}
+		case 2:{
+			cout<<"==============SORT MENU=============="<<endl;
+			cout<<"1. Ascending"<<endl;
+			cout<<"2. Descending"<<endl;
+			int option=val.enterChoice();
+
+			switch (option) {
+			case 1:
+				sort(LA.begin(), LA.end(), [](const LibrarianAccount* a, const LibrarianAccount* b) { return a->getName() < b->getName();});
+				break;
+			case 2:
+				sort(LA.begin(), LA.end(), [](const LibrarianAccount* a, const LibrarianAccount* b) { return a->getName() > b->getName();});
+				break;
+			default:
+				cout<<"Error: INVALID INPUT"<<endl;
+				break;
+			}
+			break;
+		}
+        case 3:
+            break;
+		default:
+			cout<<"Error: INVALID INPUT"<<endl;
+			break;
+		}
+    }
 };

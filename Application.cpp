@@ -39,7 +39,7 @@ private:
         cout<<"5. Search book information"<<endl;
         cout<<"6. Sort book information"<<endl;
         cout<<"7. Save data"<<endl;
-        cout<<"8. Log out"<<endl;
+        cout<<"8. Back"<<endl;
         cout<<"0. Exit"<<endl;
     }
     void librarianMenu(){
@@ -51,7 +51,19 @@ private:
         cout<<"5. Search account"<<endl;
         cout<<"6. Sort account information"<<endl;
         cout<<"7. Save data"<<endl;
-        cout<<"8. Log out"<<endl;
+        cout<<"8. Back"<<endl;
+        cout<<"0. Exit"<<endl;
+    }
+    void menu(){
+        cout<<"==================Main Menu=================="<<endl;
+        cout<<"1. Book manager"<<endl;
+        cout<<"2. Librarian account manager"<<endl;
+        cout<<"3. Log out"<<endl;
+    }
+    void userMenu(){
+        cout<<"==================Log in and Register=================="<<endl;
+        cout<<"1. Log in"<<endl;
+        cout<<"2. Register"<<endl;
         cout<<"0. Exit"<<endl;
     }
 public:
@@ -146,8 +158,21 @@ public:
 
     }
     void run(){
-        // BM.loadBook();
-        bookManager();
-        // librarianManager();
+
+        menu();
+        int choice=val.enterChoice();
+        switch (choice) {
+        case 1:
+            bookManager();
+            break;
+        case 2:
+            librarianManager();
+            break;
+        case 3:
+            break;
+        default:
+            cout<<"Error: INVALID INPUT"<<endl;
+            break;
+        }
     }
 };
