@@ -248,7 +248,8 @@ public:
 				
 				if(choice=='y'||choice=='Y'){
 					auto iter=find(BA.begin(), BA.end(), acc);
-					BA.erase(iter);
+					BA.erase(it);
+					cout<<"Deleted successfully"<<endl;
 				}else{
 					cout<<"Deletion canceled"<<endl;
 				}
@@ -269,7 +270,8 @@ public:
 				
 				if(choice=='y'||choice=='Y'){
 					auto iter=find(BA.begin(), BA.end(), acc);
-					BA.erase(iter);
+					BA.erase(it);
+					cout<<"Deleted successfully"<<endl;
 				}else{
 					cout<<"Deletion canceled"<<endl;
 				}

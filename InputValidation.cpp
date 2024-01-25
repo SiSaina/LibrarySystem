@@ -72,6 +72,18 @@ public:
             }
         }
     }
+    string enterPass(){
+        string pass;
+        while (true) {
+            cout<<"Enter password: ";
+            getline(cin, pass);
+            if(validationName(pass)){
+                return pass;
+            }else{
+                cout<<"Error: INPUT PASSWORD IS INCORRECT"<<endl;
+            }
+        }
+    }
     double enterPrice(){
         double price;
         while(true){

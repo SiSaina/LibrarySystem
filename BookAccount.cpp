@@ -21,10 +21,10 @@ public:
         setPrice(price);
     }
 
-    virtual int getID() const {
+    int getID() const {
         return id;
     }
-    virtual string getName() const {
+    string getName() const {
         return name;
     }
     double getPrice() const {

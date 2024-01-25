@@ -7,6 +7,7 @@
 #include "PremiumBookAccount.cpp"
 #include "BasicBookAccount.cpp"
 #include "LibrarianManager.cpp"
+#include "LoginAndRegister.cpp"
 
 using namespace std;
 
@@ -25,9 +26,9 @@ enum {
 class Application{
 private:
     BookManager BM;
-    BookAccount* accBA{};
+    BookAccount* BAAcc{};
     LibrarianManager LM;
-    LibrarianAccount* accLA{};
+    LibrarianAccount* LAAcc{};
     InputValidation val;
     
     void bookMenu(){
@@ -68,7 +69,7 @@ private:
     }
 public:
 
-    void bookManager(){
+    void bookManagement(){
         int choice=0;
         int option=0;
 
@@ -85,32 +86,29 @@ public:
                 break;
             case UPDATE: {
                 char choice;
-                do{
-                    BM.updateBook(accBA);
-
-                    cout<<"Do you want to update again??"<<endl;
-                    choice=val.enterYN();
-                }while(choice=='y'||choice=='Y');
+                    do{
+                        BM.updateBook(BAAcc);
+                        cout<<"Do you want to update again??"<<endl;
+                        choice=val.enterYN();
+                    }while(choice=='y'||choice=='Y');
                 }
                 break;
             case DELETE:{
                 char choice;
-                do{
-                    BM.deleteBook(accBA);
-
-                    cout<<"Do you want to delete again??"<<endl;
-                    choice=val.enterYN();
-                }while(choice=='y'||choice=='Y');
+                    do{
+                        BM.deleteBook(BAAcc);
+                        cout<<"Do you want to delete again??"<<endl;
+                        choice=val.enterYN();
+                    }while(choice=='y'||choice=='Y');
                 }
                 break;
             case SEARCH:{
                 char choice;
-                do{
-                    BM.searchBook(accBA);
-
-                    cout<<"Do you want to search again??"<<endl;
-                    choice=val.enterYN();
-                }while(choice=='y'||choice=='Y');
+                    do{
+                        BM.searchBook(BAAcc);
+                        cout<<"Do you want to search again??"<<endl;
+                        choice=val.enterYN();
+                    }while(choice=='y'||choice=='Y');
                 }
                 break;
             case SORT:
@@ -130,7 +128,7 @@ public:
         } while(choice!=10);
     }
 
-    void librarianManager(){
+    void librarianManagement(){
         int choice=0;
         int option=0;
 
@@ -146,7 +144,21 @@ public:
                 LM.viewAllAccount();
                 break;
             case UPDATE:
-                LM.updateAccount(accLA);
+                LM.updateAccount(LAAcc);
+                break;
+            case DELETE:
+                LM.deleteAccount(LAAcc);
+                break;
+            case SEARCH:
+                LM.searchAccount(LAAcc);
+                break;
+            case SORT:
+                LM.sortAccount(LAAcc);
+                break;
+            case SAVE:
+                LM.saveAccount();
+                break;
+            case LOGOUT:
                 break;
             case EXIT:
                 exit(0);
@@ -158,21 +170,48 @@ public:
 
     }
     void run(){
+        int choice=0;
+        LoginAndRegister log;
 
-        menu();
-        int choice=val.enterChoice();
-        switch (choice) {
-        case 1:
-            bookManager();
-            break;
-        case 2:
-            librarianManager();
-            break;
-        case 3:
-            break;
-        default:
-            cout<<"Error: INVALID INPUT"<<endl;
-            break;
-        }
+        do{
+            userMenu();
+            choice=val.enterChoice();
+            switch (choice) {
+            case 1:
+                if(log.userLogin()==true){
+                    system("cls");
+                    menu();
+                    int option=val.enterChoice();
+                    switch (option) {
+                    case 1:
+                        bookManagement();
+                        break;
+                    case 2:
+                        librarianManagement();
+                        break;
+                    case 3:
+                        break;
+                    default:
+                        cout<<"Error: INVALID INPUT"<<endl;
+                        break;
+                    }
+                }
+                break;
+            case 2:
+                log.userRegister();
+                break;
+            case 3:
+                exit(1);
+            default:
+                cout<<"Error: INVALID INPUT"<<endl;
+                break;
+            }
+        }while(choice!=0);
+    }
+    void test(){
+        //LM.loadAccount();
+        //BM.loadBook();
+        bookManagement();
+        //librarianManagement();
     }
 };

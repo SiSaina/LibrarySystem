@@ -1,6 +1,8 @@
 #pragma once
 #include <iostream>
 #include <vector>
+#include <fstream>
+#include <algorithm>
 #include "LibrarianAccount.cpp"
 #include "InputValidation.cpp"
 
@@ -152,7 +154,8 @@ public:
 				
 				if(choice=='y'||choice=='Y'){
 					auto iter=find(LA.begin(), LA.end(), acc);
-					LA.erase(iter);
+					LA.erase(it);
+                    cout<<"Deleted successfully"<<endl;
 				}else{
 					cout<<"Deletion canceled"<<endl;
 				}
@@ -173,7 +176,8 @@ public:
 				
 				if(choice=='y'||choice=='Y'){
 					auto iter=find(LA.begin(), LA.end(), acc);
-					LA.erase(iter);
+					LA.erase(it);
+                    cout<<"Deleted successfully"<<endl;
 				}else{
 					cout<<"Deletion canceled"<<endl;
 				}
@@ -278,4 +282,34 @@ public:
 			break;
 		}
     }
+
+    void saveAccount() {
+        ofstream outputFile("Librarian account.dat");
+        if (!outputFile.is_open()) {
+            cerr << "Error opening file for writing." << endl;
+            return;
+        }
+
+        for(const auto& it : LA){
+            outputFile  << it->getID() << ";"
+                        << it->getName() << ";"
+                        << it->getWage() << endl;
+        }
+        outputFile.close();
+        cout << "Data saved successfully." << endl;
+    }
+
+    void loadAccount() {
+        ifstream inputFile("Librarian account.dat");
+        if (!inputFile.is_open()) {
+            cerr << "Error opening file for reading." << endl;
+            return;
+        }
+
+        inputFile.read(reinterpret_cast<char*>(this), sizeof(*this));
+
+        inputFile.close();
+        cout << "Data loaded successfully." << endl;
+    }
+
 };
