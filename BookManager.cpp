@@ -24,9 +24,9 @@ private:
 	}
 	void bookTypeMenu(){
 		cout << "==============CHOOSE BOOK TYPE=============="<<endl;
-		cout << "1. Premium Account"<<endl;
-		cout << "2. Basic Account"<<endl;
-		cout << "3. Back to main menu"<<endl;
+		cout << "1. Premium book"<<endl;
+		cout << "2. Basic book"<<endl;
+		cout << "3. Back"<<endl;
 	}
 public:
 	~BookManager(){

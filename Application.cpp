@@ -80,6 +80,7 @@ public:
             switch (choice) {
             case ADD:
                 BM.addBookMenu();
+                cout<<"Added successfully"<<endl;
                 break;
             case OUTPUT:
                 BM.viewAllBook();
@@ -88,6 +89,7 @@ public:
                 char choice;
                     do{
                         BM.updateBook(BAAcc);
+                        cout<<"Updated successfully"<<endl;
                         cout<<"Do you want to update again??"<<endl;
                         choice=val.enterYN();
                     }while(choice=='y'||choice=='Y');
@@ -97,6 +99,7 @@ public:
                 char choice;
                     do{
                         BM.deleteBook(BAAcc);
+                        cout<<"Deleted successfully"<<endl;
                         cout<<"Do you want to delete again??"<<endl;
                         choice=val.enterYN();
                     }while(choice=='y'||choice=='Y');
@@ -106,6 +109,7 @@ public:
                 char choice;
                     do{
                         BM.searchBook(BAAcc);
+                        cout<<"Searched successfully"<<endl;
                         cout<<"Do you want to search again??"<<endl;
                         choice=val.enterYN();
                     }while(choice=='y'||choice=='Y');
@@ -113,6 +117,7 @@ public:
                 break;
             case SORT:
                 BM.sortBook();
+                cout<<"Sorted successfully"<<endl;
                 break;
             case SAVE:
                 // BM.saveBook();
@@ -143,20 +148,38 @@ public:
             case OUTPUT:
                 LM.viewAllAccount();
                 break;
-            case UPDATE:
-                LM.updateAccount(LAAcc);
+            case UPDATE:{
+                char choice;
+                do{
+                    LM.updateAccount(LAAcc);
+                    cout<<"Do you want to update again??"<<endl;
+                    choice=val.enterYN();
+                }while(choice=='y'||choice=='Y');
+                }
                 break;
-            case DELETE:
-                LM.deleteAccount(LAAcc);
+            case DELETE:{
+                char choice;
+                do{
+                    LM.deleteAccount(LAAcc);
+                    cout<<"Do you want to delete again??"<<endl;
+                    choice=val.enterYN();
+                }while(choice=='y'||choice=='Y');
+                }
                 break;
-            case SEARCH:
-                LM.searchAccount(LAAcc);
+            case SEARCH:{
+                char choice;
+                do{
+                    LM.searchAccount(LAAcc);
+                    cout<<"Do you want to search again??"<<endl;
+                    choice=val.enterYN();
+                }while(choice=='y'||choice=='Y');
+                }
                 break;
             case SORT:
                 LM.sortAccount(LAAcc);
                 break;
             case SAVE:
-                LM.saveAccount();
+                //LM.saveAccount();
                 break;
             case LOGOUT:
                 break;
@@ -179,16 +202,19 @@ public:
             switch (choice) {
             case 1:
                 if(log.userLogin()==true){
-                    system("cls");
                     menu();
                     int option=val.enterChoice();
                     switch (option) {
-                    case 1:
-                        bookManagement();
+                    case 1:{
+                        //BM.loadBook();
+                        bookManagement();   
                         break;
-                    case 2:
+                    }
+                    case 2:{
+                        //LM.loadAccount();
                         librarianManagement();
                         break;
+                    }
                     case 3:
                         break;
                     default:
@@ -200,7 +226,7 @@ public:
             case 2:
                 log.userRegister();
                 break;
-            case 3:
+            case 0:
                 exit(1);
             default:
                 cout<<"Error: INVALID INPUT"<<endl;
@@ -211,7 +237,7 @@ public:
     void test(){
         //LM.loadAccount();
         //BM.loadBook();
-        bookManagement();
+        //bookManagement();
         //librarianManagement();
     }
 };

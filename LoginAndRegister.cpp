@@ -11,24 +11,6 @@ private:
     string name, pass;
     InputValidation val;
 public:
-    LoginAndRegister() : name("unknown"), pass("unknown") { }
-    LoginAndRegister(string name, string pass){
-        setName(name);
-        setPass(pass);
-    }
-
-    string getName() const{
-        return name;
-    }
-    string getPass() const{
-        return pass;
-    }
-    void setName(const string name) {
-        this->name = (name.length() > 0) ? name : throw ExceptionHandling();
-    }
-    void setPass(const string pass) {
-        this->pass = (pass.length() > 0) ? pass : throw ExceptionHandling();
-    }
 
     bool userLogin() {
     name=val.enterName();
@@ -63,6 +45,7 @@ public:
     void userRegister() {
         name=val.enterName();
         pass=val.enterPass();
+
         ofstream file("users.dat", ios::out | ios::app);
 
         if (!file.is_open()) {
