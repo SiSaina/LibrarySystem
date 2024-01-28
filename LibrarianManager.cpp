@@ -34,6 +34,7 @@ public:
             LibrarianAccount* acc = new LibrarianAccount();
             acc->input();
             LA.push_back(acc);
+            cout<<"\tAdded successfully"<<endl;
         }
 
     }
@@ -112,6 +113,7 @@ public:
 
             if (it != LA.end()) {
 				updateHandleMenu(*it);
+                cout<<"Updated successfully"<<endl;
 			} else {
 				cout << "Not found" << endl;
 			}
@@ -125,6 +127,7 @@ public:
 
             if (it != LA.end()) {
 				updateHandleMenu(*it);
+                cout<<"Updated successfully"<<endl;
 			} else {
 				cout << "Not found" << endl;
 			}

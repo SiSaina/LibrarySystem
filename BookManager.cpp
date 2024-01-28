@@ -50,6 +50,7 @@ public:
 					auto premiumBookAccount = make_unique<PremiumBookAccount>();
 					premiumBookAccount->input();
 					addBook(premiumBookAccount.release());
+					cout<<"\tAdded successfully"<<endl;
 				}
                 break;
             }
@@ -60,6 +61,7 @@ public:
 					auto basicBookAccount = make_unique<BasicBookAccount>();
 					basicBookAccount->input();
 					addBook(basicBookAccount.release());
+					cout<<"\tAdded successfully"<<endl;
 				}
                 break;
             }
@@ -216,10 +218,12 @@ public:
 		switch (choice) {
 		case 1: {
 			updateBookByType<PremiumBookAccount>(acc);
+			cout<<"Updated successfully"<<endl;
 			break;
 		}
 		case 2: {
 			updateBookByType<BasicBookAccount>(acc);
+			cout<<"Updated successfully"<<endl;
 			break;
 		}
 		case 3:
@@ -239,7 +243,9 @@ public:
 		case 1:{
 			int key=val.enterID();
 
-			auto it=find_if(BA.begin(), BA.end(), [key](const BookAccount* acc) {return acc->getID() == key;});
+            auto it = find_if(BA.begin(), BA.end(), [key](const BookAccount* acc) {
+                return dynamic_cast<const BookType*>(acc) != nullptr && acc->getID() == key;
+            });
 			if(it!=BA.end()){
 				cout<<"Book information will be deleted"<<endl;
 				(*it)->display();
@@ -247,7 +253,7 @@ public:
 				char choice=val.enterYN();
 				
 				if(choice=='y'||choice=='Y'){
-					auto iter=find(BA.begin(), BA.end(), acc);
+
 					BA.erase(it);
 					cout<<"Deleted successfully"<<endl;
 				}else{
@@ -261,7 +267,9 @@ public:
 		case 2:{
 			string key=val.enterName();
 
-			auto it=find_if(BA.begin(), BA.end(), [key](const BookAccount* acc) {return acc->getName() == key;});
+            auto it = find_if(BA.begin(), BA.end(), [key](const BookAccount* acc) {
+                return dynamic_cast<const BookType*>(acc) != nullptr && acc->getName() == key;
+            });
 			if(it!=BA.end()){
 				cout<<"Book information will be deleted"<<endl;
 				(*it)->display();
@@ -269,7 +277,6 @@ public:
 				char choice=val.enterYN();
 				
 				if(choice=='y'||choice=='Y'){
-					auto iter=find(BA.begin(), BA.end(), acc);
 					BA.erase(it);
 					cout<<"Deleted successfully"<<endl;
 				}else{
@@ -315,7 +322,9 @@ public:
 		case 1:{
 			int key=val.enterID();
 
-			auto it=find_if(BA.begin(), BA.end(), [key](const BookAccount* acc) {return acc->getID() == key;});
+            auto it = find_if(BA.begin(), BA.end(), [key](const BookAccount* acc) {
+                return dynamic_cast<const BookType*>(acc) != nullptr && acc->getID() == key;
+            });
 			if(it!=BA.end()){
 				cout << "==============BOOK INFORMATION=============="<<endl;
 				(*it)->display();
@@ -327,7 +336,9 @@ public:
 		case 2:{
 			string key=val.enterName();
 
-			auto it=find_if(BA.begin(), BA.end(), [key](const BookAccount* acc) {return acc->getName() == key;});
+            auto it = find_if(BA.begin(), BA.end(), [key](const BookAccount* acc) {
+                return dynamic_cast<const BookType*>(acc) != nullptr && acc->getName() == key;
+            });
 			if(it!=BA.end()){
 				cout << "==============BOOK INFORMATION=============="<<endl;
 				(*it)->display();
@@ -348,10 +359,12 @@ public:
 		switch (choice) {
 			case 1: {
 				searchBookByType<PremiumBookAccount>(acc);
+				cout<<"Searched successfully"<<endl;
 				break;
 			}
 			case 2: {
 				searchBookByType<BasicBookAccount>(acc);
+				cout<<"Searched successfully"<<endl;
 				break;
 			}
 			case 3:

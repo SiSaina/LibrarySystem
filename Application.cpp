@@ -89,7 +89,6 @@ public:
                 char choice;
                     do{
                         BM.updateBook(BAAcc);
-                        cout<<"Updated successfully"<<endl;
                         cout<<"Do you want to update again??"<<endl;
                         choice=val.enterYN();
                     }while(choice=='y'||choice=='Y');
@@ -99,7 +98,6 @@ public:
                 char choice;
                     do{
                         BM.deleteBook(BAAcc);
-                        cout<<"Deleted successfully"<<endl;
                         cout<<"Do you want to delete again??"<<endl;
                         choice=val.enterYN();
                     }while(choice=='y'||choice=='Y');
@@ -109,7 +107,6 @@ public:
                 char choice;
                     do{
                         BM.searchBook(BAAcc);
-                        cout<<"Searched successfully"<<endl;
                         cout<<"Do you want to search again??"<<endl;
                         choice=val.enterYN();
                     }while(choice=='y'||choice=='Y');
@@ -120,6 +117,7 @@ public:
                 cout<<"Sorted successfully"<<endl;
                 break;
             case SAVE:
+                cout<<"Save successfully"<<endl;
                 // BM.saveBook();
                 break;
             case LOGOUT:
@@ -130,7 +128,7 @@ public:
                 cout<<"Error: INVALID INPUT"<<endl;
                 break;
             }
-        } while(choice!=10);
+        } while(choice!=10&&choice!=8);
     }
 
     void librarianManagement(){
@@ -145,9 +143,11 @@ public:
             case ADD:
                 LM.addAccount();
                 break;
-            case OUTPUT:
+            case OUTPUT:{
+                system("cls");
                 LM.viewAllAccount();
                 break;
+            }
             case UPDATE:{
                 char choice;
                 do{
@@ -179,10 +179,11 @@ public:
                 LM.sortAccount(LAAcc);
                 break;
             case SAVE:
+                cout<<"Save successfully"<<endl;
                 //LM.saveAccount();
                 break;
             case LOGOUT:
-                break;
+                return;
             case EXIT:
                 exit(0);
             default:
@@ -194,6 +195,7 @@ public:
     }
     void run(){
         int choice=0;
+        int option=0;
         LoginAndRegister log;
 
         do{
@@ -202,25 +204,27 @@ public:
             switch (choice) {
             case 1:
                 if(log.userLogin()==true){
-                    menu();
-                    int option=val.enterChoice();
-                    switch (option) {
-                    case 1:{
-                        //BM.loadBook();
-                        bookManagement();   
-                        break;
-                    }
-                    case 2:{
-                        //LM.loadAccount();
-                        librarianManagement();
-                        break;
-                    }
-                    case 3:
-                        break;
-                    default:
-                        cout<<"Error: INVALID INPUT"<<endl;
-                        break;
-                    }
+                    do{
+                        menu();
+                        option=val.enterChoice();
+                        switch (option) {
+                        case 1:{
+                            //BM.loadBook();
+                            bookManagement();   
+                            break;
+                        }
+                        case 2:{
+                            //LM.loadAccount();
+                            librarianManagement();
+                            break;
+                        }
+                        case 3:
+                            break;
+                        default:
+                            cout<<"Error: INVALID INPUT"<<endl;
+                            break;
+                        }
+                    }while(option!=3);
                 }
                 break;
             case 2:
