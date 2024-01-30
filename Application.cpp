@@ -143,11 +143,9 @@ public:
             case ADD:
                 LM.addAccount();
                 break;
-            case OUTPUT:{
-                system("cls");
+            case OUTPUT:
                 LM.viewAllAccount();
                 break;
-            }
             case UPDATE:{
                 char choice;
                 do{
